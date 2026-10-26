@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botón Subir</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 2000px; /* simula página larga */
+    background: linear-gradient(to bottom, #1f2833, #0b0c10);
+    color: #fff;
+  }
+
+  /* Botón subir */
+  #btnSubir {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    display: none; /* oculto por defecto */
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+  }
+
+  #btnSubir:hover {
+    background-color: #e68900;
+  }
+</style>
+</head>
+<body>
+
+<h1>Ejemplo de página con botón subir</h1>
+<p>Desplázate hacia abajo para ver el botón aparecer.</p>
+
+<!-- Botón -->
+<button id="btnSubir">↑</button>
+
+<script>
+  const btnSubir = document.getElementById("btnSubir");
+
+  // Mostrar botón cuando se baja 200px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      btnSubir.style.display = "block";
+    } else {
+      btnSubir.style.display = "none";
+    }
+  });
+
+  // Al hacer clic, subir suavemente
+  btnSubir.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+</body>
+</html>

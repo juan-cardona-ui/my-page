@@ -26,11 +26,451 @@
     <!-- Custom styles for this template -->
     <link href="css/resume.min.css" rel="stylesheet">
 
+
+<style>
+ 
+
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px; /* 👈 separa las tarjetas */
+    display: block;       /* 👈 asegura que cada tarjeta ocupe toda la fila */
+  }
+
+
+  #observaciones {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px; /* 👈 separa las tarjetas */
+    display: block;       /* 👈 asegura que cada tarjeta ocupe toda la fila */
+  }
+
+  .card:hover {
+    background-color: #efefef;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+     background-color: #c7c8cb !important; /* 👈 color de fondo del encabezado */
+  }
+
+  .card-header h3 {
+    color: #163b5b;
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .card-header small {
+    color: #6b7b8c;
+  }
+
+  .arrow {
+    background-color: #e8f0ff;
+    color: #163b5b;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  .content {
+    margin-top: 10px;
+    display: none;
+    color: #333;
+  }
+
+  .open .content {
+    display: block;
+  }
+
+  .open .arrow {
+    transform: rotate(90deg);
+  }
+
+
+
+
+
+
+
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.tarjeta {
+  min-width: 0;
+  overflow: hidden;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px #00000015;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px #00000025;
+}
+
+.tarjeta img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.tarjeta h3 {
+  margin: 0;
+  padding: 18px;
+  color: #222;
+  text-align: center;
+}
+
+/* Fondo del modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.modal.activo {
+  display: flex;
+}
+
+/* Ventana emergente */
+.modal-contenido {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  text-align: center;
+  animation: aparecer 0.25s ease;
+}
+
+.modal-contenido img {
+  display: block;
+  width: 100%;
+  max-height: 55vh;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.modal-contenido h2 {
+  margin: 18px 0 10px;
+}
+
+.modal-contenido p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.cerrar {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 1;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  color: #222;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #00000030;
+}
+
+.modal-abierto {
+  overflow: hidden;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Adaptación a tablets y celulares */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+
+  .galeria {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .tarjeta img {
+    height: 170px;
+  }
+}
+
+@media (max-width: 480px) {
+  .galeria {
+    grid-template-columns: 1fr;
+  }
+
+  .tarjeta img {
+    height: 220px;
+  }
+
+  .modal {
+    padding: 12px;
+  }
+
+  .modal-contenido {
+    padding: 14px;
+  }
+}
+
+
+/* ===== Particles.js dentro de #sideNav ===== */
+#sideNav {
+  overflow: hidden; /* las partículas no se salen del menú */
+}
+
+#particles-sidenav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; /* los clics pasan a los enlaces del menú */
+}
+
+#particles-sidenav canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Particles.js dentro de #testimonials ===== */
+#testimonials {
+  position: relative;
+  width: 100%;
+  height: 100px;               /* la sección estaba vacía: necesita altura */
+  margin-bottom: 3rem;
+  border-radius: 14px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
+}
+
+#testimonials canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* El contenido del menú queda por encima de las partículas */
+#sideNav > .navbar-brand,
+#sideNav > .navbar-toggler,
+#sideNav > .navbar-collapse {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ===== Menú estilo vidrio (transparente y difuminado) ===== */
+#sideNav {
+ /*  background: rgba(255, 255, 255, 0.10) !important; */ /* pisa el bg-primary de Bootstrap */
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.20);
+}
+
+/* Enlaces: mayúsculas, bordes redondeados */
+#sideNav .navbar-nav .nav-item .nav-link {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  margin: 0.2rem 0;
+  border-radius: 10px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+#sideNav .navbar-nav .nav-item .nav-link:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* Sección activa: "píldora" blanca con texto oscuro (debe ir después del :hover) */
+#sideNav .navbar-nav .nav-item .nav-link.active {
+  background: #fff;
+  color: #163b5b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Escritorio: el menú lateral flota como una tarjeta de vidrio */
+@media (min-width: 992px) {
+  #sideNav {
+    top: 12px;
+    left: 12px;
+    bottom: 12px;
+    height: auto;
+    width: calc(17rem - 24px);
+    border-radius: 18px;
+  }
+
+  /* Fondo con color detrás del menú: es lo que el vidrio difumina */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 17rem;
+    height: 100vh;
+    z-index: -1;
+    background:
+       radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
+  }
+}
+
+/* Móvil: barra superior de vidrio; el contenido se difumina al pasar por debajo */
+@media (max-width: 991.98px) {
+  #sideNav {
+    border-top: 0;
+    border-radius: 0 0 16px 16px;
+  }
+}
+
+
+/* ===== Menú adaptable: la lista se ajusta a la altura de la pantalla ===== */
+@media (min-width: 992px) {
+  /* Columna que reparte el espacio: foto arriba, lista debajo, todo centrado */
+  #sideNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  /* La foto crece o se encoge según el alto de la ventana */
+  #sideNav .navbar-brand {
+    flex: 0 0 auto;
+    margin: 0 auto clamp(0.25rem, 1.5vh, 1rem);
+    padding: 0;
+  }
+/* tamaño foto 25,14 */
+  #sideNav .navbar-brand .img-profile {
+    width: clamp(4rem, 25vh, 14rem);
+    height: clamp(4rem, 25vh, 14rem);
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    border-width: clamp(0.2rem, 0.8vh, 0.5rem);
+  }
+
+  /* La lista puede encogerse (min-height: 0) y, si aun así no cabe, hace scroll interno */
+  #sideNav .navbar-collapse {
+    flex: 0 1 auto;
+    min-height: 0;
+    margin: 0;
+    overflow-y: auto;
+    scrollbar-width: none;            /* Firefox */
+  }
+
+  #sideNav .navbar-collapse::-webkit-scrollbar {
+    display: none;                    /* Chrome / Safari */
+  }
+
+  /* Espacios y tamaño de letra que escalan con la altura de la pantalla */
+  #sideNav .navbar-nav .nav-item .nav-link {
+    font-size: clamp(0.75rem, 1.8vh, 1rem);
+    line-height: 1.2;
+    letter-spacing: 0.04rem;
+    padding: clamp(0.35rem, 1.5vh, 0.75rem) 0.75rem;
+    margin: clamp(0.05rem, 0.4vh, 0.2rem) 0;
+  }
+}
+
+/* Móvil: si el menú desplegado no cabe en pantalla, hace scroll en vez de cortarse */
+@media (max-width: 991.98px) {
+  #sideNav .navbar-collapse {
+    max-height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+  }
+}
+
+
+#btnSubir {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #ff9800;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    opacity: 0; /* 👈 invisible por defecto */
+    pointer-events: none; /* no clickeable cuando está oculto */
+    transition: opacity 0.6s ease; /* 👈 transición suave */
+    z-index: 1000;
+  }
+
+  #btnSubir.show {
+    opacity: 1; /* 👈 aparece gradualmente */
+    pointer-events: auto; /* vuelve a ser clickeable */
+  }
+
+  #btnSubir:hover {
+    background-color: #e68900;
+  }
+
+  
+</style>
+    
+
   </head>
 
   <body id="page-top">
+    <button id="btnSubir">↑</button>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <!-- Contenedor de Particles.js -->
+      <div id="particles-sidenav"></div>
+
       <a class="navbar-brand js-scroll-trigger" href="#page-top">
         <span class="d-block d-lg-none">Inicio</span>
         <span class="d-none d-lg-block">
@@ -46,10 +486,13 @@
             <a class="nav-link js-scroll-trigger" href="#about">Arerca de mi</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#proyectos">Últimos Proyectos</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#experience">Experiencia</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#education">Educacion</a>
+            <a class="nav-link js-scroll-trigger" href="#education">Educación</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
@@ -83,7 +526,7 @@
 
         
           
-          <ul class="list-inline list-social-icons mb-0">
+          <!-- <ul class="list-inline list-social-icons mb-0">
             <li class="list-inline-item">
               <a href="#">
                 <span class="fa-stack fa-lg">
@@ -116,9 +559,220 @@
                 </span>
               </a>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </section>
+
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="proyectos">
+        <div class="my-auto">
+          <h2 class="mb-5">Últimos Proyectos</h2>
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Proyecto Creación Sitio Web odontocarmen</h3>
+              <div class="card" id="observaciones">
+  <div class="card-header">
+    <div>
+      <h3>Desarrollo integral de plataforma digital para servicios odontológicos y posicionamiento local.</h3>
+     
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="content">
+    <p>Responsable del diseño, desarrollo y puesta en marcha de un sitio web especializado en servicios odontológicos, incluyendo la definición de la arquitectura, instalación y configuración, integración de catálogos de tratamientos y optimización de la experiencia de usuario.
+<br>Implementación de estrategias de SEO y marketing digital para mejorar el posicionamiento en buscadores, logrando mayor visibilidad en búsquedas locales relacionadas con odontología.
+<li>Configuración de sistemas de contacto directo (formularios, WhatsApp, agenda en línea) para facilitar la captación de pacientes y la gestión de citas.</li>
+<li>Integración de herramientas de analítica (Google Analytics, Search Console) para medir el rendimiento del sitio y aplicar mejoras continuas en velocidad, usabilidad y conversión.</li>
+<li>Coordinación con el equipo de diseño y marketing para asegurar una identidad visual coherente con la marca y transmitir confianza a los pacientes.</li>
+<li>Resultados: incremento en la captación de pacientes nuevos, mejora en la tasa de conversión y consolidación de la presencia digital de la clínica odontológica en la región.</p></li>
+  
+
+ <section class="galeria">
+    <div class="tarjeta" onclick="abrirModal(0)">
+      <img src="img/odontocarmen-1.png"
+           alt="Paisaje natural">
+      <h3>Index</h3>
+    </div>
+
+    <div class="tarjeta" onclick="abrirModal(1)">
+      <img src="img/odontocarmen-2.png"
+           alt="Montañas">
+      <h3>Integración herramientas de Google.</h3>
+    </div>
+
+    <div class="tarjeta" onclick="abrirModal(2)">
+      <img src="img/odontocarmen-3.png"
+           alt="Amanecer">
+      <h3>Identidad Corporativa</h3>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" onclick="cerrarFondo(event)">
+    <div class="modal-contenido">
+      <button class="cerrar" onclick="cerrarModal()"
+              aria-label="Cerrar modal">&times;</button>
+
+      <img id="modal-imagen" src="" alt="">
+      <h2 id="modal-titulo"></h2>
+      <p id="modal-descripcion"></p>
+    </div>
+  </div>
+
+
+</div>
+
+      </div>           
+          </div>
+
+
+          
+           </div>
+<br>
+        </div>
+
+
+<div class="my-auto">
+         
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Aplicativo Control Inventarios</h3>
+              <div class="card" id="observaciones">
+  <div class="card-header">
+    <div>
+      <h3>Desarrollo de sistema integral para la gestión y control de inventarios en entorno local.</h3>
+     
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="content">
+    <p>Desarrollo de aplicación web local para importar, actualizar y consultar inventario a partir de archivos Excel generados por un programa externo.
+<br>
+<p><b>- El sistema</b></p>
+<li>Lee archivos `.xls` y `.xlsx`.</li>
+<li>Detecta automáticamente la hoja y la fila de encabezados.</li>
+<li>Traduce los campos externos al modelo interno.</li>
+<li>Inserta productos nuevos y actualiza productos existentes mediante SKU.</li>
+<li>Conserva los ceros iniciales de los códigos.</li>
+<li>Evita productos duplicados.</li>
+<li>Permite elegir el stock mínimo en cada importación.</li>
+<li>Convierte existencias negativas a `0` y registra advertencias.</li>
+<li>Muestra productos nuevos y actualizados después de cada importación.</li>
+<li>Permite consultar el inventario con búsqueda, filtros, ordenamiento y paginación.</li>
+<li>Incluye login, cambio de contraseña y cierre de sesión.</li>
+<li>Incluye un bloc único de observaciones generales.</li><br>
+  
+ <section class="galeria">
+    <div class="tarjeta" onclick="abrirModal(3)">
+      <img src="img/Inventario-4.png"
+           alt="Paisaje natural">
+      <h3>Consulta Del Inventario</h3>
+    </div>
+
+    <div class="tarjeta" onclick="abrirModal(4)">
+      <img src="img/Inventario-2.png"
+           alt="Montañas">
+      <h3>Dash Board</h3>
+    </div>
+
+    <div class="tarjeta" onclick="abrirModal(5)">
+      <img src="img/Inventario-3.png"
+           alt="Amanecer">
+      <h3>Carga de Inventario</h3>
+    </div>
+
+
+   
+  </section>
+
+
+</div>
+
+      </div>           
+          </div>
+
+
+          
+           </div>
+<br>
+        </div>
+
+
+
+        <div class="my-auto">
+         
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Creación, Implementación Ecommerce Mercado Libre</h3>
+              <div class="card" id="observaciones">
+  <div class="card-header">
+    <div>
+      <h3>Gestión integral de e‑commerce en Mercado Libre.</h3>
+     
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="content">
+    <p>Experiencia en la creación y montaje de catálogos de productos, configuración de publicaciones y optimización de perfiles comerciales.
+<br>Responsable de la administración de ventas en línea, incluyendo estrategias de posicionamiento de marca, campañas de marketing digital y análisis de métricas para mejorar la visibilidad y conversión.
+<br>Coordinación de procesos logísticos: control de inventarios, gestión de envíos, seguimiento de pedidos y atención al cliente para garantizar una experiencia de compra satisfactoria.
+<br>Implementación de técnicas de SEO y SEM aplicadas a descripciones y títulos de productos, logrando mayor alcance y competitividad en el marketplace.
+<br>Resultados: incremento en las ventas, fortalecimiento de la reputación de la tienda y consolidación de la presencia digital de la marca.</p>
+<li>Creación y montaje de catálogos de productos en la plataforma.</li>
+
+<li>Configuración de publicaciones optimizadas con títulos, descripciones y fotografías atractivas.</li>
+
+<li>Implementación de estrategias de marketing digital y posicionamiento de marca.</li>
+
+<li>Administración de ventas en línea y seguimiento de métricas de rendimiento.</li>
+
+<li>Coordinación de procesos logísticos: inventarios, envíos y atención al cliente.</li>
+
+<li>Aplicación de técnicas de SEO y SEM para aumentar visibilidad y competitividad.</li>
+
+<li>Resultados: incremento en ventas, mejora en la reputación de la tienda y consolidación de la presencia digital.</li>
+<br>
+<section class="galeria">
+    <div class="tarjeta" onclick="abrirModal(6)">
+      <img src="img/electroferia-4.png"
+           alt="Paisaje natural">
+      <h3>Cración Plataforma en Mercado Libre</h3>
+    </div>
+
+    <div class="tarjeta" onclick="abrirModal(7)">
+      <img src="img/electroferia-3.png"
+           alt="Montañas">
+      <h3>Configuración de Productos</h3>
+    </div>
+
+    <div class="tarjeta" onclick="abrirModal(8)">
+      <img src="img/electroferia-1.png"
+           alt="Amanecer">
+      <h3>Creación de Mi Página en Mercado Libre</h3>
+    </div>
+
+
+   
+  </section>
+
+  </div>
+
+      </div>           
+          </div>
+
+
+          
+           </div>
+<br>
+        </div>
+
+
+      </section>
+
+
+
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
         <div class="my-auto">
@@ -259,6 +913,34 @@
             </div>
           </div>
 
+
+ <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Catolicismo militante(camil)</h3>
+              <div class="subheading mb-3">Inglés B2</div>
+              
+              
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">Mayo de 2026</span>
+            </div>
+          </div>
+
+
+
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+              <h3 class="mb-0">Talento Especializado Sapiencia, Infocenter</h3>
+              <div class="subheading mb-3">MySQL, Desarrollo Web</div>
+              
+              
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">Diciembre de 2023</span>
+            </div>
+          </div>
+
+
           <div class="resume-item d-flex flex-column flex-md-row">
             <div class="resume-content mr-auto">
               <h3 class="mb-0">SENA(Servicio Nacional de Aprendizaje)</h3>
@@ -345,10 +1027,7 @@
               <i class="devicon-visualstudio-plain colored"></i>
             </li>
 
-            <li class="list-inline-item">
-              <i class="devicon-mysql-plain colored"></i>
-            </li>
-
+            
             <li class="list-inline-item">
               <i class="devicons devicons-composer colored"></i>
             </li>
@@ -419,6 +1098,15 @@
             <li>
               <i class="fa fa-check-square-o text-success"></i>
               Joomla</li>
+              <li>
+              <i class="fa fa-check-square-o text-success"></i>
+              Claude</li>
+              <i class="fa fa-check-square-o text-success"></i>
+              Copilot</li>
+            <li>
+              <i class="fa fa-check-square-o text-success"></i>
+              Gemini</li>
+              
             <li>
               <i class="fa fa-check-square-o text-success"></i>
               Ingles B2</li>
@@ -463,6 +1151,220 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/resume.min.js"></script>
+
+    <!-- Particles.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-sidenav", {
+        particles: {
+          number: { value: 60, density: { enable: true, value_area: 600 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.6, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 110,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          // "window" porque los enlaces del menú quedan encima del canvas
+          detect_on: "window",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 0.8 } },
+            push: { particles_nb: 3 }
+          }
+        },
+        retina_detect: true
+      });
+
+      // Partículas en la sección #testimonials
+      particlesJS("testimonials", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.6, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 130,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          // Aquí no hay contenido encima, así que basta detectar sobre el canvas
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 160, line_linked: { opacity: 0.8 } },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
+    </script>
+
+
+    <script>
+  // Abrir/cerrar una tarjeta SOLO al pulsar su encabezado.
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('.card-header')) {
+        card.classList.toggle('open');
+      }
+    });
+  });
+
+  // Mover el modal fuera del contenido desplegable para que no desaparezca.
+  const modalElemento = document.getElementById('modal');
+  if (modalElemento) {
+    document.body.appendChild(modalElemento);
+  }
+
+const contenido = [
+      {
+        titulo: "Sitio Web Odontocarmen",
+        imagen: "img/odontocarmen-1.png",
+        descripcion: "diseño, desarrollo y puesta en marcha."
+      },
+      {
+        titulo: "Google Tools Integration",
+        imagen: "img/odontocarmen-2.png",
+        descripcion: "Integración herramientas de Google."
+      },
+      {
+        titulo: "Identidad Corporativa",
+        imagen: "img/odontocarmen-3.png",
+        descripcion: "identidad visual coherente con la marca."
+      },
+
+      {
+        titulo: "Consulta del Inventario",
+        imagen: "img/Inventario-4.png",
+        descripcion: "Consulta del inventario con búsqueda, filtros, ordenamiento y paginación."
+      },
+
+      {
+        titulo: "Dash Board",
+        imagen: "img/Inventario-2.png",
+        descripcion: "Pantalla de Inicio, con carga independiente de información según usuario."
+      },
+
+      {
+        titulo: "Carga de Inventario",
+        imagen: "img/Inventario-3.png",
+        descripcion: "Carga de datos del inventario, configuración para detectar automativamente columnas del archivo externo y volcar datos."
+      }
+
+      ,
+
+      {
+        titulo: "Creación de la plataforma en Mercado Libre",
+        imagen: "img/electroferia-4.png",
+        descripcion: "Creación y Configuración de Cuenta , productos, precios, envíos, promociones, reputación."
+      }
+      ,
+
+      {
+        titulo: "Configuración de Productos",
+        imagen: "img/electroferia-3.png",
+        descripcion: "Configuración de precios, envíos, logística, promociones, pauta, SEO, marketing."
+      }
+
+      ,
+
+      {
+        titulo: "Creación de Mi Página en Mercado Libre",
+        imagen: "img/electroferia-1.png",
+        descripcion: "Creación de la página de la empresa en Mercado Libre, con información de contacto, productos destacados y promociones."
+      }
+    ];
+
+    function abrirModal(indice) {
+      const item = contenido[indice];
+
+      document.getElementById("modal-imagen").src = item.imagen;
+      document.getElementById("modal-imagen").alt = item.titulo;
+      document.getElementById("modal-titulo").textContent = item.titulo;
+      document.getElementById("modal-descripcion").textContent =
+        item.descripcion;
+
+      document.getElementById("modal").classList.add("activo");
+      document.body.classList.add("modal-abierto");
+    }
+
+    function cerrarModal() {
+      document.getElementById("modal").classList.remove("activo");
+      document.body.classList.remove("modal-abierto");
+    }
+
+    function cerrarFondo(event) {
+      if (event.target.id === "modal") {
+        cerrarModal();
+      }
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        cerrarModal();
+      }
+    });
+
+
+
+
+</script>
+
+<script>
+ const btnSubir = document.getElementById("btnSubir");
+
+  // Mostrar botón cuando se baja 200px
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      btnSubir.classList.add("show");
+    } else {
+      btnSubir.classList.remove("show");
+    }
+  });
+
+  // Al hacer clic, subir suavemente
+  btnSubir.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
 
   </body>
 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarjetas con acordeón</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f7fa;
+    padding: 40px;
+  }
+
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+  }
+
+  .card:hover {
+    background-color: #f0f4ff;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-header h3 {
+    color: #163b5b;
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .card-header small {
+    color: #6b7b8c;
+  }
+
+  .arrow {
+    background-color: #e8f0ff;
+    color: #163b5b;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  .content {
+    max-height: 0;              /* 👈 contenido oculto */
+    overflow: hidden;
+    transition: max-height 0.5s ease; /* 👈 animación suave */
+    color: #333;
+  }
+
+  .open .content {
+    max-height: 200px;          /* 👈 altura máxima al abrir */
+  }
+
+  .open .arrow {
+    transform: rotate(90deg);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div>
+      <h3>Observaciones generales</h3>
+      <small>observaciones-bodega</small>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="content">
+    <p>Aquí puedes escribir las observaciones detalladas sobre la bodega.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div>
+      <h3>Detalles adicionales</h3>
+      <small>información-extra</small>
+    </div>
+    <div class="arrow">›</div>
+  </div>
+  <div class="content">
+    <p>Este es el contenido de la segunda tarjeta, que aparece debajo de la primera.</p>
+  </div>
+</div>
+
+<script>
+  // Función para abrir/cerrar cada tarjeta con animación
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>

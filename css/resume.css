@@ -22,7 +22,7 @@ h6 {
   font-family: 'Saira Extra Condensed', serif;
   font-weight: 700;
   text-transform: uppercase;
-  color: #343a40; }
+  color: #3e3a59; }
 
 h1 {
   font-size: 6rem;
@@ -104,7 +104,11 @@ section.resume-section {
     padding-bottom: 3rem !important; } }
 
 .bg-primary {
-  background-color: #393a39  !important; }
+  background-color: #393a39  !important;
+
+
+
+}
 
 .text-primary {
   color: #BD5D38 !important; }

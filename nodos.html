@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Efecto de partículas en barra lateral</title>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #1f2833;
+  }
+
+  /* Barra lateral */
+  #sideNav {
+    position: relative;
+    width: 250px;
+    background: linear-gradient(to bottom, #0b0c10, #1f2833);
+    border-right: 3px solid #ff9800;
+    color: #c5c6c7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    overflow: hidden; /* 👈 importante para que las partículas no se salgan */
+  }
+
+  /* Contenedor de partículas dentro del sideNav */
+  #particles-js {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* detrás del contenido */
+  }
+
+  /* Contenido del menú */
+  #sideNav h3, #sideNav a {
+    position: relative;
+    z-index: 1; /* encima de las partículas */
+    color: #c5c6c7;
+    text-decoration: none;
+    margin: 10px 0;
+    font-weight: 600;
+  }
+
+  #sideNav h3 {
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<div id="sideNav">
+  <div id="particles-js"></div>
+  <h3>ACERCA DE MI</h3>
+  <a href="#">EXPERIENCIA</a>
+  <a href="#">EDUCACIÓN</a>
+  <a href="#">SKILLS</a>
+  <a href="#">INTERESES</a>
+  <a href="#">CURSOS</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 50 },
+    color: { value: "#ff9800" },
+    shape: { type: "circle" },
+    opacity: { value: 0.6, anim: { enable: true, speed: 0.5 } },
+    size: { value: 3, random: true },
+    line_linked: {
+      enable: true,
+      distance: 120,
+      color: "#ff9800",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 1.5,
+      direction: "none",
+      random: true,
+      straight: false,
+      out_mode: "out"
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "grab" },
+      onclick: { enable: false }
+    },
+    modes: {
+      grab: { distance: 150, line_linked: { opacity: 0.7 } }
+    }
+  },
+  retina_detect: true
+});
+</script>
+
+</body>
+</html>
